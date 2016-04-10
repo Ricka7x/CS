@@ -1,0 +1,58 @@
+<div class="container">
+ <div class="m-t-sm">
+ 	 <div class="row">
+		<div class="col-md-8">
+			<h2><small><%= @course.name %></small></h2>
+				<div>
+					<%= image_tag @course.image(:medium), class:'img-responsive' %> 
+				</div>
+				<hr>
+				<h2><small>Description</small></h2>
+				<p><%= @course.content %></p>
+				<h2><small>Curriculum</small></h2>
+				<div class="list-group">	
+					<% @tasks.each do |task| %>
+						<% if task.header %>
+								<a class="list-group-item active">
+							    <%= task.title %>
+							  </a>
+							<% else %>
+							<%= link_to [task.course, task], class: 'list-group-item' do %>
+							<%= task.title %>
+							<% end %>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+			
+
+			
+		<div class="col-md-4">
+			<h2><small>Course Details</small></h2>
+			 <table class="table">
+					<tr>
+						<td>Price:</td>
+						<td><strong>$<%= @course.price %>.00</strong></td>
+					</tr>
+					<tr>
+						<td>Lectures:</td>
+						<td><strong><%= @tasks.count %></strong></td>
+					</tr>
+					<tr>
+						<td>Skill Level:</td>
+						<td><strong><%= @task.tag %></strong></td>
+					</tr>
+					<tr>
+						<td>Lenguage:</td>
+						<td><strong>English</strong></td>
+					</tr>
+			</table>
+			<button type="button" class="btn btn-primary btn-lg btn-block">Take Course</button>
+				
+		</div>
+	    		
+	</div>
+ </div>
+</div>
+
+
