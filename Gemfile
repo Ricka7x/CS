@@ -37,6 +37,8 @@ gem 'omniauth-facebook', '~> 3.0'
 
 gem 'activeadmin', github: 'activeadmin'
 
+gem 'paperclip', '~> 4.3', '>= 4.3.6'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
