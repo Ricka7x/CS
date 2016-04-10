@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 25}   
   validates :email, :uniqueness => true
 
+
   def self.find_for_facebook_oauth(access_token, signed_in_resourse=nil)
     data = access_token.info
     user = User.where(:provider => access_token.provider, :uid => access_token.uid).first
