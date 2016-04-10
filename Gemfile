@@ -29,6 +29,12 @@ gem 'devise'
 
 gem 'toastr-rails', '~> 1.0', '>= 1.0.3'
 
+gem 'figaro', '~> 1.1', '>= 1.1.1'
+
+gem 'omniauth', '~> 1.3', '>= 1.3.1'
+
+gem 'omniauth-facebook', '~> 3.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
