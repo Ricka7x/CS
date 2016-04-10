@@ -1,0 +1,36 @@
+
+<div class="container-fluid container-fill-height">
+  <div class="container-content-middle">
+
+    <%= form_for(resource, :html => {:class => "m-x-auto text-center app-login-form"}, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+        <%= image_tag 'brand', class: 'app-brand m-b-lg' %>
+        <div class="form-group">
+          <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.password_field :password, autocomplete: "off", class:'form-control', placeholder: 'Password'  %>
+        </div>
+        
+         <% if devise_mapping.rememberable? -%>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+        <% end -%>
+        
+
+        <div class="m-b-lg">
+          <%= f.submit "Login", class: 'btn btn-primary' %>
+        </div>
+
+        <footer class="screen-login">
+        <%= render "devise/shared/links"  %>
+      </footer>
+
+    <% end %>
+    
+  </div>
+</div>

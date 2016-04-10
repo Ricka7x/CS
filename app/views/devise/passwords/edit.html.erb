@@ -1,0 +1,29 @@
+<div class="container-fluid container-fill-height">
+  <div class="container-content-middle">
+
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "m-x-auto text-center app-login-form" }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <%= image_tag 'brand', class: 'app-brand m-b-lg' %>
+      
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="form-group">
+          <%= f.password_field :password, autocomplete: "off", class:'form-control', placeholder: 'Password'  %>
+      </div>
+
+      <div class="form-group">
+          <%= f.password_field :password_confirmation, autocomplete: "off", class:'form-control', placeholder: 'Confirm Password' %>
+      </div>
+
+      <div class="m-b-lg">
+          <%= f.submit "Change my password", class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+
+     <footer class="screen-login">
+        <%= render "devise/shared/links"  %>
+      </footer>
+
+</div>
+</div>    

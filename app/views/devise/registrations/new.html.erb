@@ -1,0 +1,41 @@
+
+
+<div class="container-fluid container-fill-height">
+  <div class="container-content-middle">
+    <%= form_for(resource, :html => {:class => "m-x-auto text-center app-login-form"}, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+        <%= image_tag 'brand', class: 'app-brand m-b-lg' %>
+
+        <div class="form-group">
+          <%= f.text_field :name, autofocus: true, autocomplete: "off", class:'form-control', placeholder: 'Username'  %>
+        </div>
+
+        <div class="form-group">
+          <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.password_field :password, autocomplete: "off", class:'form-control', placeholder: 'Password'  %>
+        </div>
+
+        <div class="form-group">
+          <%= f.password_field :password_confirmation, autocomplete: "off", class:'form-control', placeholder: 'Confirm Password' %>
+        </div>
+
+        <div class="m-b-lg">
+          <%= f.submit "Sign up", class: 'btn btn-primary' %>
+        </div>
+
+        <footer class="screen-login">
+        <%= render "devise/shared/links"  %>
+      </footer>
+
+    <% end %>
+    
+  </div>
+</div>
+
+
+
+
