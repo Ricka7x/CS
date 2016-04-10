@@ -1,5 +1,30 @@
-<div class="container">
-	<%= @task.title %>
-	<%= @task.note %>
-	<%= @task.video %>
-</div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<div class="list-group">	
+					<% @tasks.each do |task| %>
+						<% if task.header %>
+								<a class="list-group-item active">
+							    <%= task.title %>
+							  </a>
+							<% else %>
+							<%= link_to [task.course, task], class: 'list-group-item' do %>
+							<%= task.title %>
+							<% end %>
+						<% end %>
+					<% end %>
+				</div>
+		</div>
+		<div class="col-md-9">
+			<h2><small><%= @task.title %></small></h2>
+				<div>
+					<%= @task.video %>
+				</div>
+				<hr>
+				<h2><small>Teacher's Notes</small></h2>
+				<p><%= markdown(@task.note) %></p>
+		</div>
+	</div>
+
+
+
