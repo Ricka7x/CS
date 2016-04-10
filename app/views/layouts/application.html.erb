@@ -7,8 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= flash_messages %>
+
+
+
 <%= render partial: "shared/nav" %>
+<%= render partial: "shared/messages" %>
 <%= yield %>
 
 </body>

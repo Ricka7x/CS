@@ -3,7 +3,7 @@
   <div class="container-content-middle">
 
     <%= form_for(resource, :html => {:class => "m-x-auto text-center app-login-form"}, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+    <%= render partial: "shared/devise_messages" %>  
 
         <%= image_tag 'brand', class: 'app-brand m-b-lg' %>
         <div class="form-group">

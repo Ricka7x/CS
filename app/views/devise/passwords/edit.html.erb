@@ -2,7 +2,7 @@
   <div class="container-content-middle">
 
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "m-x-auto text-center app-login-form" }) do |f| %>
-      <%= devise_error_messages! %>
+      <%= render partial: "shared/devise_messages" %>  
 
       <%= image_tag 'brand', class: 'app-brand m-b-lg' %>
       

@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require toolkit	
+//= require toastr
 //= app
 //= require_tree .
 
