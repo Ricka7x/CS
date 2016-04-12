@@ -9,4 +9,8 @@ class Course < ActiveRecord::Base
 
     has_attached_file :image, styles: { medium: "680x370.24>", thumb: "275.5x150>" }
   	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  	def price_in_cents
+  		price * 100
+  	end
 end

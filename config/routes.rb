@@ -8,6 +8,7 @@ Rails.application.routes.draw do
               :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
   root 'welcome#index'
   post '/free' => 'charges#free'
+  post '/paid' => 'charges#paid'
   get  '/my_courses' => 'courses#my_courses'
 
   resources :courses do

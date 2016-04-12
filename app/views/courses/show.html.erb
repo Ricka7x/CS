@@ -1,9 +1,7 @@
 <div class="container">
  <div class="m-t-sm">
  	 <div class="row">
-
-
-		<div class="col-md-8">
+    <div class="col-md-8">
 			<h2><small><%= @course.name %></small></h2>
 				<div>
 					<%= image_tag @course.image(:medium), class:'img-responsive' %> 
@@ -27,62 +25,99 @@
 				</div>
 			</div>
 			
-		<% if !@joined %>
-				<div class="col-md-4">
-					<h2><small>Course Details</small></h2>
-					 <table class="table">
-							<tr>
-								<td>Price:</td>
-								<td><strong><%= @course.price == 0? "Free" : "$#{@course.price}.00" %></strong></td>
-							</tr>
-							<tr>
-								<td>Lectures:</td>
-								<td><strong><%= @tasks.count %></strong></td>
-							</tr>
-							<tr>
-								<td>Skill Level:</td>
-								<td><strong>Begginer</strong></td>
-							</tr>
-							<tr>
-								<td>Lenguage:</td>
-								<td><strong>English</strong></td>
-							</tr>
-					</table>
-					<% if signed_in? %>
+			<% if !@joined %>
+					<div class="col-md-4">
+						<h2><small>Course Details</small></h2>
+						 <table class="table">
+								<tr>
+									<td>Price:</td>
+									<td><strong><%= @course.price == 0? "Free" : "$#{@course.price}.00" %></strong></td>
+								</tr>
+								<tr>
+									<td>Lectures:</td>
+									<td><strong><%= @tasks.count %></strong></td>
+								</tr>
+								<tr>
+									<td>Skill Level:</td>
+									<td><strong>Begginer</strong></td>
+								</tr>
+								<tr>
+									<td>Lenguage:</td>
+									<td><strong>English</strong></td>
+								</tr>
+						</table>
+				<% if signed_in? %>
+					<% if @course.price == 0 %>
 						<%= form_tag free_path do %>
 							<%= hidden_field_tag 'course_id', @course.id %>
 							<button type="submit" class="btn btn-primary btn-lg btn-block">Take Course</button>
 						<% end %>	
-					<% else %>
-						<%= link_to new_user_session_path do %>
-							<button type="button" class="btn btn-primary btn-lg btn-block">Take Course</button>
-						<% end %>	
-					<% end %>
+					<% else %>	
+						 <%= form_tag paid_path, id: 'charge-form' do %>
+							<script src="https://checkout.stripe.com/checkout.js"></script>
+							<%= hidden_field_tag 'stripeToken' %>
+							<%= hidden_field_tag 'stripeEmail' %>
+							<%= hidden_field_tag 'course_id', @course.id %>
+
+							<button class="btn btn-primary btn-lg btn-block" id="customButton" type="button" >Take Course</button>
+							<script>
+								  var handler = StripeCheckout.configure({
+								    key:'<%= Rails.configuration.stripe[:publishable_key] %>',
+								    locale: 'auto',
+								    token: function(token, arg) {
+								      // Use the token to create the charge with a server-side script.
+								      // You can access the token ID with `token.id`
+								      $('#stripeToken').val(token.id);
+								      $('#stripeEmail').val(token.email);
+								      $('#chargeForm').submit();
+								    }
+								  });
+
+								  $('#customButton').on('click', function(e) {
+								    // Open Checkout with further options
+								    handler.open({
+								      name: 'Clonestartup',
+								      description: '<%= @course.name %>',
+								      amount: '<%= @course.price_in_cents %>',
+								      email: '<%= current_user.email %>',
+								    });
+								    e.preventDefault();
+								  });
+						</script>
+					<% end %>	
+				<% end %>
+
+
+						<% else %>
+							<%= link_to new_user_session_path do %>
+								<button type="button" class="btn btn-primary btn-lg btn-block">Take Course</button>
+							<% end %>	
+						<% end %>
+					</div>
+			<% else %>
+					<div class="col-md-4">
+						<h2><small>Course Details</small></h2>
+						 <table class="table">
+								<tr>
+									<td>Status:</td>
+									<td><strong>Enrolled</strong></td>
+								</tr>
+								<tr>
+									<td>Lectures:</td>
+									<td><strong><%= @tasks.count %></strong></td>
+								</tr>
+								<tr>
+									<td>Skill Level:</td>
+									<td><strong>Begginer</strong></td>
+								</tr>
+								<tr>
+									<td>Lenguage:</td>
+									<td><strong>English</strong></td>
+								</tr>
+						</table>
+							<button type="button" class="btn btn-primary btn-lg btn-block">Go to Course</button>
 				</div>
-		<% else %>
-				<div class="col-md-4">
-					<h2><small>Course Details</small></h2>
-					 <table class="table">
-							<tr>
-								<td>Status:</td>
-								<td><strong>Enrolled</strong></td>
-							</tr>
-							<tr>
-								<td>Lectures:</td>
-								<td><strong><%= @tasks.count %></strong></td>
-							</tr>
-							<tr>
-								<td>Skill Level:</td>
-								<td><strong>Begginer</strong></td>
-							</tr>
-							<tr>
-								<td>Lenguage:</td>
-								<td><strong>English</strong></td>
-							</tr>
-					</table>
-						<button type="button" class="btn btn-primary btn-lg btn-block">Go to Course</button>
-			</div>
-    <% end %>
+	    <% end %>
     		
 	</div>
  </div>
