@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, length: {maximum: 25}   
   validates :email, :uniqueness => true
+  has_many :subscriptions
+  has_many :courses, through: :subscriptions
 
 
   def self.find_for_facebook_oauth(access_token, signed_in_resourse=nil)

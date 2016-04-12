@@ -1,0 +1,30 @@
+
+<div class="container ">
+	<h2><small>My Courses</small></h2>
+	<div class="m-t-sm">
+		<div class="row">
+			<% if @courses.count > 0 %>
+				<% @courses.each do |course| %>
+		    	<div class="col-md-3">
+		    	 <%= link_to course, class: 'panel-link' do %>
+		    		<div class="panel panel-default panel-profile">
+			        <div class="panel-heading" style="background:url(<%= course.image %>) no-repeat center; background-size: cover;"></div>    
+			        <div class="panel-body text-center">
+			          <h5 class="panel-title"><%= course.name %></h5>
+			          <p class="m-b-md"><%= course.content %></p>
+				          <button class="btn btn-primary-outline btn-sm">
+				             Course Details
+				          </button>
+			        </div>
+			      </div>
+			    <% end %>
+			    </div>
+	    <% end %>
+		<% else %>
+			<p>You don't have any courses</p>
+			<%= link_to 'Search Courses', my_courses_path, :class => 'class' %>
+		<% end %>
+	  
+  </div>
+	</div>
+</div>

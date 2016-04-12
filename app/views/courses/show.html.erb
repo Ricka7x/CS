@@ -1,6 +1,8 @@
 <div class="container">
  <div class="m-t-sm">
  	 <div class="row">
+
+
 		<div class="col-md-8">
 			<h2><small><%= @course.name %></small></h2>
 				<div>
@@ -18,39 +20,70 @@
 							  </a>
 							<% else %>
 							<%= link_to [task.course, task], class: 'list-group-item' do %>
-							<%= task.title %>
+								<%= task.title %>
 							<% end %>
 						<% end %>
 					<% end %>
 				</div>
 			</div>
 			
-
-			
-		<div class="col-md-4">
-			<h2><small>Course Details</small></h2>
-			 <table class="table">
-					<tr>
-						<td>Price:</td>
-						<td><strong>$<%= @course.price %>.00</strong></td>
-					</tr>
-					<tr>
-						<td>Lectures:</td>
-						<td><strong><%= @tasks.count %></strong></td>
-					</tr>
-					<tr>
-						<td>Skill Level:</td>
-						<td><strong>Begginer</strong></td>
-					</tr>
-					<tr>
-						<td>Lenguage:</td>
-						<td><strong>English</strong></td>
-					</tr>
-			</table>
-			<button type="button" class="btn btn-primary btn-lg btn-block">Take Course</button>
-				
-		</div>
-	    		
+		<% if !@joined %>
+				<div class="col-md-4">
+					<h2><small>Course Details</small></h2>
+					 <table class="table">
+							<tr>
+								<td>Price:</td>
+								<td><strong><%= @course.price == 0? "Free" : "$#{@course.price}.00" %></strong></td>
+							</tr>
+							<tr>
+								<td>Lectures:</td>
+								<td><strong><%= @tasks.count %></strong></td>
+							</tr>
+							<tr>
+								<td>Skill Level:</td>
+								<td><strong>Begginer</strong></td>
+							</tr>
+							<tr>
+								<td>Lenguage:</td>
+								<td><strong>English</strong></td>
+							</tr>
+					</table>
+					<% if signed_in? %>
+						<%= form_tag free_path do %>
+							<%= hidden_field_tag 'course_id', @course.id %>
+							<button type="submit" class="btn btn-primary btn-lg btn-block">Take Course</button>
+						<% end %>	
+					<% else %>
+						<%= link_to new_user_session_path do %>
+							<button type="button" class="btn btn-primary btn-lg btn-block">Take Course</button>
+						<% end %>	
+					<% end %>
+				</div>
+		<% else %>
+				<div class="col-md-4">
+					<h2><small>Course Details</small></h2>
+					 <table class="table">
+							<tr>
+								<td>Status:</td>
+								<td><strong>Enrolled</strong></td>
+							</tr>
+							<tr>
+								<td>Lectures:</td>
+								<td><strong><%= @tasks.count %></strong></td>
+							</tr>
+							<tr>
+								<td>Skill Level:</td>
+								<td><strong>Begginer</strong></td>
+							</tr>
+							<tr>
+								<td>Lenguage:</td>
+								<td><strong>English</strong></td>
+							</tr>
+					</table>
+						<button type="button" class="btn btn-primary btn-lg btn-block">Go to Course</button>
+			</div>
+    <% end %>
+    		
 	</div>
  </div>
 </div>

@@ -23,6 +23,7 @@ header{
 // 	padding: 25% 15%;
 }
 
+
 .container-narrow{
     padding: 0 10px;
 }
@@ -62,6 +63,14 @@ header{
   color: rgba(48, 151, 209, 0);
 }
 
+.panel-link{
+  color: initial;
+  text-decoration: none;
+}
+.panel-link:hover{
+  
+  text-decoration: none;
+}
 // -------------------------------------------------------------------------
 
 /*

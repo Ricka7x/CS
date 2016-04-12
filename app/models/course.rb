@@ -1,5 +1,7 @@
 class Course < ActiveRecord::Base
 	has_many :tasks
+	has_many :subscriptions
+	has_many :users, through: :subscriptions
 
 	  validates :name, presence: true, length: { maximum: 50 }
     validates :content, presence: true, length: { maximum: 500 }

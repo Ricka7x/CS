@@ -40,7 +40,7 @@
               <span class="icon icon-bell"></span>
             </a>
           </li>
-          <li><a class="username" data-toggle="popover" data-original-title="" title=""><%= current_user.name %><span class="caret"></span></a>
+          <li><a class="username" data-toggle="popover" data-original-title="" title=""><%= current_user.name %>&nbsp<span class="caret"></span></a>
           </li>
           <li>
               <button class="btn btn-default navbar-btn navbar-btn-avitar">
@@ -70,13 +70,13 @@
             <a href="#">Messages</a>
             </a>
           </li>
-          <li><a href="#">My Courses</a></li>
+          <li><%= link_to 'My Courses', my_courses_path %></li>
           <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
          <% end %> 
         </ul>
 
         <ul class="nav navbar-nav hidden">
-          <li><a href="#" >My Courses</a></li>
+           <li><%= link_to 'My Courses', my_courses_path %></li>
           <li><%= link_to "Settings", edit_user_registration_path %></li>
           <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
         </ul>
